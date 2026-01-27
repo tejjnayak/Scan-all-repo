@@ -55,7 +55,7 @@ jobs:
                 --namespace "$ENDOR_NAMESPACE" \
                 --api-key "$ENDOR_API_KEY" \
                 --api-secret "$ENDOR_API_SECRET" \
-                --dependencies
+                --dependencies \
                 --tags "$BU_TAG"
             else
               endorctl scan \
