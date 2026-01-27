@@ -31,6 +31,17 @@ jobs:
             mkdir -p $HOME/bin
             mv endorctl $HOME/bin/endorctl
             echo "$HOME/bin" >> $GITHUB_PATH
+            
+      - name: Authenticate to Endor Labs
+        env:
+          ENDOR_NAMESPACE: tej-learn
+          ENDOR_API_KEY: ${{ secrets.ENDOR_API_KEY }}
+          ENDOR_API_SECRET: ${{ secrets.ENDOR_API_SECRET }}
+        run: |
+          endorctl auth login \
+          --api-key "$ENDOR_API_KEY" \
+          --api-secret "$ENDOR_API_SECRET" \
+          --namespace "$ENDOR_NAMESPACE"
 
 
       - name: Scan repositories and tag projects
