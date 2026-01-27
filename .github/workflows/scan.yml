@@ -29,6 +29,9 @@ jobs:
              exit 1;
             fi
             chmod +x ./endorctl
+            mkdir -p $HOME/bin
+            mv endorctl $HOME/bin/endorctl
+            echo "$HOME/bin" >> $GITHUB_PATH
 
       - name: Scan repositories and tag projects
         env:
