@@ -1,0 +1,14 @@
+[
+  {
+    "name": "vulnerable-app",
+    "BU_TAGS": "p1"
+  },
+  {
+    "name": "python-test-dependency",
+    "BU_TAGS": "p2"
+  },
+  {
+    "name": "go-test",
+    "BU_TAGS": "p2"
+  }
+]
