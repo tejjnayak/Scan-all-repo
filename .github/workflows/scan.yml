@@ -39,6 +39,7 @@ jobs:
           ENDOR_NAMESPACE: tej-learn
           ENDOR_API_KEY: ${{ secrets.ENDOR_API_KEY }}
           ENDOR_API_SECRET: ${{ secrets.ENDOR_API_SECRET }}
+          ENDOR_DISABLE_IDENTITY_TOKEN: "true"
         run: |
           jq -c '.[]' repos.json | while read repo; do
             NAME=$(echo "$repo" | jq -r '.name')
