@@ -37,6 +37,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           ENDOR_NAMESPACE: tej-learn
+          ENDOR_API_KEY: ${{ secrets.ENDOR_API_KEY }}
+          ENDOR_API_SECRET: ${{ secrets.ENDOR_API_SECRET }}
         run: |
           jq -c '.[]' repos.json | while read repo; do
             NAME=$(echo "$repo" | jq -r '.name')
