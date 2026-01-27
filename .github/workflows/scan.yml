@@ -20,6 +20,12 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
+      - name: Install endorctl
+        run: |
+          curl -fsSL https://api.endorlabs.com/download/endorctl/linux/amd64 -o endorctl
+          chmod +x endorctl
+          sudo mv endorctl /usr/local/bin/
+
       - name: Scan repositories and tag projects
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
