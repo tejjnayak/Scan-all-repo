@@ -32,7 +32,7 @@ jobs:
             echo "🔍 Scanning repo: $NAME"
             echo "🏷 BU Tag: $BU_TAG"
 
-            git clone https://github.com/YOUR_ORG/$NAME.git
+            git clone https://github.com/tejjnayak/$NAME.git
             cd $NAME
 
             if [ -n "$BU_TAG" ] && [ "$BU_TAG" != "null" ]; then
