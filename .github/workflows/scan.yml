@@ -66,5 +66,13 @@ jobs:
             fi
 
             cd ..
+            if [ -n "$BU_TAG" ] && [ "$BU_TAG" != "null" ]; then
+                echo "🏷 Applying BU tag '$BU_TAG' to project $PROJECT_NAME"
+
+                endorctl api update -r Project \
+                --name "$PROJECT_NAME" \
+                --data "{ \"meta\": { \"tags\": [ \"$BU_TAG\" ] } }" \
+                --field-mask "meta.tags"
+            fi
             rm -rf "$NAME"
           done
