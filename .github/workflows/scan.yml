@@ -20,11 +20,15 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
-      - name: Install endorctl
+      - name: Download Endorctl
         run: |
-          curl -fsSL https://api.endorlabs.com/download/endorctl/linux/amd64 -o endorctl
-          chmod +x endorctl
-          sudo mv endorctl /usr/local/bin/
+            curl https://api.endorlabs.com/download/latest/endorctl_linux_amd64 -o endorctl;
+            echo "$(curl -s https://api.endorlabs.com/sha/latest/endorctl_linux_amd64)  endorctl" | sha256sum -c;
+            if [ $? -ne 0 ]; then 
+             echo "Integrity check failed"; 
+             exit 1;
+            fi
+            chmod +x ./endorctl
 
       - name: Scan repositories and tag projects
         env:
