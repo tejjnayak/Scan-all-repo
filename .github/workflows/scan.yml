@@ -1,0 +1,49 @@
+name: Scan multiple repos on push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  scan-repos:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout scan repo
+        uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Scan repositories and tag projects
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          ENDOR_NAMESPACE: tej-learn
+        run: |
+          jq -c '.[]' repos.json | while read repo; do
+            NAME=$(echo "$repo" | jq -r '.name')
+            BU_TAG=$(echo "$repo" | jq -r '.BU_TAGS')
+
+            echo "🔍 Scanning repo: $NAME"
+            echo "🏷 BU Tag: $BU_TAG"
+
+            git clone https://github.com/YOUR_ORG/$NAME.git
+            cd $NAME
+
+            if [ -n "$BU_TAG" ] && [ "$BU_TAG" != "null" ]; then
+              endorctl scan \
+                --namespace "$ENDOR_NAMESPACE" \
+                --project-tags "bu=$BU_TAG"
+            else
+              endorctl scan \
+                --namespace "$ENDOR_NAMESPACE"
+            fi
+
+            cd ..
+            rm -rf "$NAME"
+          done
