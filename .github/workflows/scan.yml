@@ -54,7 +54,7 @@ jobs:
               endorctl scan \
                 --namespace "$ENDOR_NAMESPACE" \
                 --project-tags "bu=$BU_TAG"
-                --api-key $ENDOR_API_CREDENTIALS_KEY --api-secret $ENDOR_API_CREDENTIALS_SECRET
+                --api-key $ENDOR_API_KEY --api-secret $ENDOR_API_SECRET
             else
               endorctl scan \
                 --namespace "$ENDOR_NAMESPACE"
