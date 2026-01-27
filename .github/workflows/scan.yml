@@ -43,7 +43,8 @@ jobs:
           jq -c '.[]' repos.json | while read repo; do
             NAME=$(echo "$repo" | jq -r '.name')
             BU_TAG=$(echo "$repo" | jq -r '.BU_TAGS')
-
+            PROJECT_NAME="https://github.com/tejjnayak/$NAME"
+            
             echo "🔍 Scanning repo: $NAME"
             echo "🏷 BU Tag: $BU_TAG"
 
